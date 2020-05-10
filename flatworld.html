@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Flatworld</title>
+</head>
+<body>
+	<svg width = "900" height = "600" viewBox= "0 0 900 600">
+		<rect x = "250" y = "300" width = "100"  height = "100" onclick = "lrotate()" stroke = "black" fill = "#A9A9A9"/>
+		<rect x = "400" y = "300" width = "100"  height = "100" onclick = "proceed()" stroke = "black" fill = "#A9A9A9"/>
+		<rect x = "550" y = "300" width = "100"  height = "100" onclick = "rrotate()" stroke = "black" fill = "#A9A9A9"/>
+		<rect x = "400" y = "450" width = "100"  height = "100" onclick = "reset()" stroke = "black" fill = "#FF8C00"/>
+		<div style = "position : absolute; top : 100px; left : 150px">
+			<img id = "lwall" src = "nai.png">
+		</div>
+		<div style = "position : absolute; top : 100px; left : 350px">
+			<img id = "fwall" src = "nai.png">
+		</div>
+		<div style = "position : absolute; top : 100px; left : 550px">
+			<img id = "rwall" src = "aru.png">
+		</div>
+		<div style = "position : absolute; top : 467px; left : 413px">
+			<img src = "reset.png" onclick = "reset()">
+		</div>
+		<script>
+			var wallimg = ["nai.png", "aru.png"];
+			var l = 0;
+			var f = 0;
+			var r = 1;
+			var x = 6;
+			var y = 2;
+			var d = 0;
+			var vwall = [[1, 1, 1, 1], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 1, 1, 0], [0, 0, 0, 0], [1, 1, 1, 1]];
+			var hwall = [[1, 0, 0, 0, 1], [1, 1, 1, 0, 1], [1, 1, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 1, 1], [1, 0, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 0, 1], [1, 1, 1, 0, 1], [1, 0, 0, 0, 1], [1, 1, 0, 0, 1], [1, 1, 0, 0, 1], [1, 0, 0, 0, 1]];
+			function wallimage(){
+				document.getElementById("lwall").src = wallimg[l];
+				document.getElementById("fwall").src = wallimg[f];
+				document.getElementById("rwall").src = wallimg[r];
+			}
+			function wallcheck(){
+				if (d == 0){
+					l = vwall[x][y]
+					f = hwall[x][y]
+					r = vwall[x + 1][y]
+				}
+				if (d == 1){
+					l = hwall[x][y]
+					f = vwall[x + 1][y]
+					r = hwall[x][y + 1]
+				}
+				if (d == 2){
+					l = vwall[x + 1][y]
+					f = hwall[x][y + 1]
+					r = vwall[x][y]
+				}
+				if (d == 3){
+					l = hwall[x][y + 1]
+					f = vwall[x][y]
+					r = hwall[x][y]
+				}
+				wallimage()
+			}
+			function rrotate(){
+				d += 1
+				d %= 4
+				wallcheck()
+			}
+			function lrotate(){
+				d += 3
+				d %= 4
+				wallcheck()
+			}
+			function proceed(){
+				if (d == 0){
+					if (hwall[x][y] == 0){
+						y -= 1
+					}
+				}
+				if (d == 1){
+					if (vwall[x + 1][y] == 0){
+						x += 1
+					}
+				}
+				if (d == 2){
+					if (hwall[x][y + 1] == 0){
+						y += 1
+					}
+				}
+				if (d == 3){
+					if (vwall[x][y] == 0){
+						x -= 1
+					}
+				}
+				wallcheck()
+			}
+			function reset(){
+				x = 6
+				y = 2
+				d = 0
+				wallcheck()
+			}
+		</script>
+	</svg>
+</body>
+</html>
