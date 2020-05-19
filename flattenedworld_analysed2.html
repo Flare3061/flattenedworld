@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Flattened world</title>
+</head>
+<body onselectstart="return false">
+	<svg width = "900" height = "600" viewBox= "0 0 900 600">
+		<rect x = "250" y = "300" width = "100"  height = "100" onclick = "lrotate()" stroke = "black" fill = "#A9A9A9"/>
+		<rect x = "400" y = "300" width = "100"  height = "100" onclick = "proceed()" stroke = "black" fill = "#A9A9A9"/>
+		<rect x = "550" y = "300" width = "100"  height = "100" onclick = "rrotate()" stroke = "black" fill = "#A9A9A9"/>
+		<rect x = "400" y = "450" width = "100"  height = "100" onclick = "reset()" stroke = "black" fill = "#FF8C00"/>
+		<rect x = "250" y = "450" width = "100"  height = "100" stroke = "green" fill = "#FFFFFF"/>
+		<text x = "275" y = "515" font-size = "50" id = "direction">▲</text>
+		<div style = "position : absolute; top : 102px; left : 151px">
+			<img id = "lwall" src = "lgray.png">
+		</div>
+		<div style = "position : absolute; top : 100px; left : 350px">
+			<img id = "fwall" src = "black.png">
+		</div>
+		<div style = "position : absolute; top : 102px; left : 550px">
+			<img id = "rwall" src = "rblack.png">
+		</div>
+		<div style = "position : absolute; top : 467px; left : 413px">
+			<img src = "arrow.png" onclick = "reset()">
+		</div>
+		<script>
+			var _0x83b4=["\x6C\x67\x72\x61\x79\x2E\x70\x6E\x67","\x6C\x62\x6C\x61\x63\x6B\x2E\x70\x6E\x67","\x67\x72\x61\x79\x2E\x70\x6E\x67","\x62\x6C\x61\x63\x6B\x2E\x70\x6E\x67","\x72\x67\x72\x61\x79\x2E\x70\x6E\x67","\x72\x62\x6C\x61\x63\x6B\x2E\x70\x6E\x67","\u25B2","\u25C0","\u25BC","\u25B6","\x73\x72\x63","\x6C\x77\x61\x6C\x6C","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x66\x77\x61\x6C\x6C","\x72\x77\x61\x6C\x6C","\x74\x65\x78\x74\x43\x6F\x6E\x74\x65\x6E\x74","\x64\x69\x72\x65\x63\x74\x69\x6F\x6E"];var lwallimg=[_0x83b4[0],_0x83b4[1]];var cwallimg=[_0x83b4[2],_0x83b4[3]];var rwallimg=[_0x83b4[4],_0x83b4[5]];var directions=[_0x83b4[6],_0x83b4[7],_0x83b4[8],_0x83b4[9]];var l=0;var f=0;var r=1;var x=8;var y=2;var d=0;var vwall=[[1,1,1,1],[0,1,1,0],[0,0,0,0],[0,1,0,0],[0,1,1,0],[0,0,0,0],[0,0,0,0],[0,1,1,0],[0,0,0,0],[0,1,1,0],[0,1,1,0],[0,1,1,0],[0,1,1,0],[0,1,1,0],[0,0,0,0],[0,0,0,0],[1,1,1,1]];var hwall=[[1,0,0,0,1],[1,1,1,0,1],[1,1,1,0,1],[1,0,0,0,1],[1,0,0,1,1],[1,0,0,1,1],[1,0,0,0,1],[1,1,1,0,1],[1,1,1,0,1],[1,0,0,0,1],[1,1,0,0,1],[1,0,0,1,1],[1,0,0,0,1],[1,1,1,1,1],[1,1,1,1,1],[1,0,0,0,1]];function wallimage(){document[_0x83b4[12]](_0x83b4[11])[_0x83b4[10]]= lwallimg[l];document[_0x83b4[12]](_0x83b4[13])[_0x83b4[10]]= cwallimg[f];document[_0x83b4[12]](_0x83b4[14])[_0x83b4[10]]= rwallimg[r];document[_0x83b4[12]](_0x83b4[16])[_0x83b4[15]]= directions[d]}function wallcheck(){if(d== 0){l= vwall[x][y];f= hwall[x][y];r= vwall[x+ 1][y]};if(d== 1){l= hwall[x][y];f= vwall[x+ 1][y];r= hwall[x][y+ 1]};if(d== 2){l= vwall[x+ 1][y];f= hwall[x][y+ 1];r= vwall[x][y]};if(d== 3){l= hwall[x][y+ 1];f= vwall[x][y];r= hwall[x][y]};wallimage()}function rrotate(){d+= 1;d%= 4;wallcheck()}function lrotate(){d+= 3;d%= 4;wallcheck()}function proceed(){if(d== 0){if(hwall[x][y]== 0){y-= 1}};if(d== 1){if(vwall[x+ 1][y]== 0){x+= 1}};if(d== 2){if(hwall[x][y+ 1]== 0){y+= 1}};if(d== 3){if(vwall[x][y]== 0){x-= 1}};wallcheck()}function reset(){x= 8;y= 2;d= 0;wallcheck()}
+		</script>
+	</svg>
+</body>
+</html>
